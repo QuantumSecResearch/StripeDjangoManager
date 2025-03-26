@@ -16,12 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from cfehome.views import home_page_view
+from cfehome.views import home_view
+from cfehome.views import about_view
 
 urlpatterns = [
-    path('', home_page_view),#indexe page->root page
-    path('hello-world/', home_page_view),#hello-world 
-    path('hello-world.html/', home_page_view),#hello-world.html
+    path('', home_view),#indexe page->root page
+    path("about/",about_view),#about page
+    path('hello-world/', home_view),#hello-world 
+    path('hello-world.html/', home_view),#hello-world.html
     path('admin/', admin.site.urls),
     
 ]
