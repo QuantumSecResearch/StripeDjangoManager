@@ -26,11 +26,13 @@ SECRET_KEY = 'django-insecure-!lwr(qn7#a9c84b72u&bbg@$renaae#k1!6ow-t(rm_yznkw@d
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = str(os.environ.get("DJANGO_DEBUG")).lower() == "true"
-DEBUG = config("DJANGO_DEBUG", cast=bool)
-BASE_URL = config("BASE_URL", default=None)
+DEBUG = config("DJANGO_DEBUG", default=True, cast=bool)
+BASE_URL = config("BASE_URL", default="http://127.0.0.1:8000")
+
 
 ALLOWED_HOSTS = [
-    ".railway.app"
+    ".railway.app",
+    "stripedjangomanager-production.up.railway.app"
 ]
 if DEBUG:
     ALLOWED_HOSTS+=[
