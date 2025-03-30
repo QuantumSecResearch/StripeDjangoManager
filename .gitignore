@@ -1,4 +1,10 @@
+#ingore vendor static files
+src\staticfiles\vendors
+#ignore local
+local-cdn/
+
 # Byte-compiled / optimized / DLL files
+
 venv/
 __pycache__/
 *.py[cod]
