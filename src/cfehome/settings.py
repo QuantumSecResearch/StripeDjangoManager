@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 from decouple import config
 from pathlib import Path
-import os
+import dj_database_url
 
 
 
@@ -93,7 +93,7 @@ DATABASES = {
     }
 }
 conn_max_age = config("CONN_MAX_AGE",cast=int,default=30)
-DATABASES_URL = config("DATABASES_URL",cast=str)
+DATABASES_URL = config("DATABASES_URL",cast=str) 
 if DATABASES_URL is not None:
     import dj_database_url
     DATABASES = {
