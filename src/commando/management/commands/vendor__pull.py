@@ -7,7 +7,19 @@ src_path = str(Path(__file__).resolve().parents[3])
 if src_path not in sys.path:
     sys.path.append(src_path)
 
-from helpers.dowloader import download_to_local
+# Importer la fonction download_to_local
+try:
+    from helpers.dowloader import download_to_local
+except ImportError:
+    # Fallback si l'importation échoue
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "dowloader", 
+        os.path.join(src_path, "helpers", "dowloader.py")
+    )
+    dowloader = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(dowloader)
+    download_to_local = dowloader.download_to_local
 
 from typing import Any
 from django.conf import settings
