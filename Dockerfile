@@ -45,12 +45,14 @@ RUN pip install -r /tmp/requirements.txt
 ARG Django_SECRET_KEY
 ENV DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
 
-# database isn't available during build
-# run any other commands that do not need the database
-# such as:
-RUN python manage.py vendor_pull
+ARG DJANGO_DEBUG=0
+ENV DJANGO_DEBUG=${DJANGO_DEBUG}
 
- RUN python manage.py collectstatic --noinput
+# Run vendor__pull command to download vendor files
+RUN python manage.py vendor__pull
+
+# Run collectstatic to gather all static files
+RUN python manage.py collectstatic --noinput
 
 # set the Django default project name
 ARG PROJ_NAME="cfehome"
