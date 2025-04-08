@@ -18,6 +18,15 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+#EMAIL CONFIG
+EMAIL_HOST=config("EMAIL_HOST",default="stmp.gmail.com",cast=str)
+EMAIL_HOST_USER=config("EMAIL_HOST_USER",default="aimanelghazaly94@gmail.com",cast=str)
+EMAIL_HOST_PASSWORD=config("EMAIL_HOST_PASSWORD",default="GMAIL_APP_PASSWORD",cast=str)
+EMAIL_PORT=config("EMAIL_PORT",default="587",cast=str)
+EMAIL_USE_TLS=config("EMAIL_USE_TLS",default=True)
+EMAIL_USE_SSL=config("EMAIL_USE_SSL",default=False)
+
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -55,6 +64,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -152,6 +162,13 @@ STATICFILES_DIRS=[
 #source for python manage.py collectstatic
 #LOCAL CDN
 STATIC_ROOT = BASE_DIR / "local-cdn" 
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STORAGES = {
+    # ...
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 
 
